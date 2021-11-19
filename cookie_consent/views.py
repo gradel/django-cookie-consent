@@ -46,7 +46,7 @@ class CookieGroupBaseProcessView(View):
 
     def post(self, request, *args, **kwargs):
         varname = kwargs.get('varname', None)
-        if request.is_ajax():
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             response = HttpResponse()
         else:
             response = HttpResponseRedirect(self.get_success_url())
